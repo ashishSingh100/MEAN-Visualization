@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html ng-app="graphApp">
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Graph App</title>
+    <link href="stylesheets/style.css" rel="stylesheet">
+        <link href="../bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+     <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+</head>
+
+<body>
+    <div clas="container">
+   <div ng-controller="graphCtrl as graph">
+       
+       <form name="userForm" > <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
+
+        <!-- NAME -->
+        <div class="form-group">
+            <label>X-Type</label>
+            <input type="String" name="X" class="form-control" ng-model="formdata.x" required>
+        </div>
+
+        <!-- USERNAME -->
+        <div class="form-group">
+            <label>Y-type</label>
+            <input type="number" name="Y" class="form-control" ng-model="formdata.y" ng-minlength="0" ng-maxlength="100">
+        </div>
+
+
+        <!-- SUBMIT BUTTON -->
+        <button type="submit" class="btn btn-primary" ng-click="create()" >Submit</button>
+
+    </form>
+       
+       
+       
+        <!--bar chart-->
+       <h2>Dot Chart</h2>
+    <ul class="chart" style="width:{{width}}px; height:{{height}}px;">
+      <!-- Labels -->
+      <div class="y" style="width:{{height}}px;">{{yAxis}}</div>
+      <div class="x">{{xAxis}}</div>
+      <!-- Data -->
+       <li ng-repeat="dot in data" class="dot" style="bottom:{{dot.y / max * height}}px; left:{{($index +1) / data.length * width}}px;"><span>{{dot.x}} - {{dot.y}}</span></li>
+    </div>
+    </ul>
+
+    </div>
+    </div>
+    
+    <script src="app.js"></script>
+    <script src="controllers/graphCtrl.js"></script>
+</body>
+
+</html>
